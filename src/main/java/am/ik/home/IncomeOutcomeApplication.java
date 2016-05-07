@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import java.util.Arrays;
+import java.util.Date;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -31,9 +32,9 @@ public class IncomeOutcomeApplication {
     InitializingBean init(OutcomeRepository outcomeRepository) {
         return () -> {
             outcomeRepository.save(Arrays.asList(
-                    Outcome.builder().outcomeName("にんじん").amount(100L).build(),
-                    Outcome.builder().outcomeName("ビール").amount(250L).build(),
-                    Outcome.builder().outcomeName("えのき").amount(50L).build()
+                    Outcome.builder().outcomeName("にんじん").amount(100L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder().outcomeName("ビール").amount(250L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder().outcomeName("えのき").amount(50L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build()
             ));
         };
     }

@@ -1,5 +1,6 @@
 package am.ik.home;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +11,8 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -32,9 +33,9 @@ public class IncomeOutcomeApplication {
     InitializingBean init(OutcomeRepository outcomeRepository) {
         return () -> {
             outcomeRepository.save(Arrays.asList(
-                    Outcome.builder().outcomeName("にんじん").amount(100L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
-                    Outcome.builder().outcomeName("ビール").amount(250L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
-                    Outcome.builder().outcomeName("えのき").amount(50L).outcomeDate(new Date()).outcomeBy("00000000-0000-0000-0000-000000000000").build()
+                    Outcome.builder().outcomeName("にんじん").amount(100L).outcomeDate(LocalDate.now()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder().outcomeName("ビール").amount(250L).outcomeDate(LocalDate.now()).outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder().outcomeName("えのき").amount(50L).outcomeDate(LocalDate.now()).outcomeBy("00000000-0000-0000-0000-000000000000").build()
             ));
         };
     }
@@ -43,4 +44,10 @@ public class IncomeOutcomeApplication {
     AuditorAware<String> auditorProvider(Member member) {
         return member::userId;
     }
+
+    @Bean
+    JavaTimeModule javaTimeModule() {
+        return new JavaTimeModule();
+    }
+
 }

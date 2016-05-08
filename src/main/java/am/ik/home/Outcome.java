@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -26,8 +27,7 @@ public class Outcome implements Serializable {
     private Long outcomeId;
     private String outcomeName;
     private Long amount;
-    @Temporal(TemporalType.DATE)
-    private Date outcomeDate;
+    private LocalDate outcomeDate;
     private String outcomeBy;
 
     // Audit

@@ -2,13 +2,9 @@ package am.ik.home;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.Map;
+import java.time.LocalDate;
 
 @Component
 @RepositoryEventHandler(Outcome.class)
@@ -22,7 +18,7 @@ public class OutcomeEventHandler {
             outcome.setOutcomeBy(member.userId());
         }
         if (outcome.getOutcomeDate() == null) {
-            outcome.setOutcomeDate(new Date());
+            outcome.setOutcomeDate(LocalDate.now());
         }
         System.out.println("before create " + outcome);
     }

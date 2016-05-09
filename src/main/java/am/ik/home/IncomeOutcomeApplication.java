@@ -1,6 +1,5 @@
 package am.ik.home;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
@@ -44,10 +43,4 @@ public class IncomeOutcomeApplication {
     AuditorAware<String> auditorProvider(Member member) {
         return member::userId;
     }
-
-    @Bean
-    JavaTimeModule javaTimeModule() {
-        return new JavaTimeModule();
-    }
-
 }

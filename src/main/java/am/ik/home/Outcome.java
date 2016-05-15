@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -25,10 +26,18 @@ public class Outcome implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long outcomeId;
+    @NotNull
     private String outcomeName;
+    @NotNull
     private Long amount;
+    @NotNull
     private LocalDate outcomeDate;
+    @NotNull
     private String outcomeBy;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @NotNull
+    private OutcomeCategory outcomeCategory;
 
     // Audit
     @CreatedDate
@@ -41,4 +50,19 @@ public class Outcome implements Serializable {
     private Date updatedAt;
     @LastModifiedBy
     private String updatedBy;
+
+
+    public static interface InlineCategory {
+        Long getOutcomeId();
+
+        String getOutcomeName();
+
+        Long getAmount();
+
+        LocalDate getOutcomeDate();
+
+        String getOutcomeBy();
+
+        OutcomeCategory getOutcomeCategory();
+    }
 }

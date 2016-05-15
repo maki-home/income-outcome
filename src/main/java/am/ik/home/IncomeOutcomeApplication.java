@@ -51,6 +51,18 @@ public class IncomeOutcomeApplication {
                             .amount(50L)
                             .outcomeDate(LocalDate.now())
                             .outcomeCategory(OutcomeCategory.builder().categoryId(6).build())
+                            .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder()
+                            .outcomeName("チャージ")
+                            .amount(1000L)
+                            .outcomeDate(LocalDate.now().minusDays(1))
+                            .outcomeCategory(OutcomeCategory.builder().categoryId(45).build())
+                            .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
+                    Outcome.builder()
+                            .outcomeName("クリーニング")
+                            .amount(3000L)
+                            .outcomeDate(LocalDate.now().minusDays(2))
+                            .outcomeCategory(OutcomeCategory.builder().categoryId(21).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build()
             ));
         };

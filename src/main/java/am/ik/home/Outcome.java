@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.rest.core.config.Projection;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -51,7 +52,6 @@ public class Outcome implements Serializable {
     @LastModifiedBy
     private String updatedBy;
 
-
     public static interface InlineCategory {
         Long getOutcomeId();
 
@@ -64,5 +64,19 @@ public class Outcome implements Serializable {
         String getOutcomeBy();
 
         OutcomeCategory getOutcomeCategory();
+    }
+
+    public static interface SummaryByDate {
+        LocalDate getOutcomeDate();
+
+        Long getSubTotal();
+    }
+
+    public static interface SummaryByParentCategory {
+        Integer getParentCategoryId();
+
+        String getParentCategoryName();
+
+        Long getSubTotal();
     }
 }

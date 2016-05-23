@@ -12,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.rest.core.config.Projection;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,7 +31,11 @@ public class Outcome implements Serializable {
     @NotNull
     private String outcomeName;
     @NotNull
+    @Min(0)
     private Long amount;
+    @NotNull
+    @Min(0)
+    private Integer quantity;
     @NotNull
     private LocalDate outcomeDate;
     @NotNull
@@ -58,6 +63,8 @@ public class Outcome implements Serializable {
         String getOutcomeName();
 
         Long getAmount();
+
+        Integer getQuantity();
 
         LocalDate getOutcomeDate();
 

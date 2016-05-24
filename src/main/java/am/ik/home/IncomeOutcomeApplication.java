@@ -38,6 +38,7 @@ public class IncomeOutcomeApplication {
                     Outcome.builder().outcomeName("にんじん")
                             .amount(100L)
                             .quantity(1)
+                            .isCreditCard(true)
                             .outcomeDate(LocalDate.now())
                             .outcomeCategory(OutcomeCategory.builder().categoryId(6).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
@@ -45,6 +46,7 @@ public class IncomeOutcomeApplication {
                             .outcomeName("ビール")
                             .amount(250L)
                             .quantity(1)
+                            .isCreditCard(true)
                             .outcomeDate(LocalDate.now())
                             .outcomeCategory(OutcomeCategory.builder().categoryId(13).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
@@ -52,6 +54,7 @@ public class IncomeOutcomeApplication {
                             .outcomeName("えのき")
                             .amount(50L)
                             .quantity(1)
+                            .isCreditCard(true)
                             .outcomeDate(LocalDate.now())
                             .outcomeCategory(OutcomeCategory.builder().categoryId(6).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
@@ -59,6 +62,7 @@ public class IncomeOutcomeApplication {
                             .outcomeName("チャージ")
                             .amount(1000L)
                             .quantity(1)
+                            .isCreditCard(false)
                             .outcomeDate(LocalDate.now().minusDays(1))
                             .outcomeCategory(OutcomeCategory.builder().categoryId(45).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build(),
@@ -66,6 +70,7 @@ public class IncomeOutcomeApplication {
                             .outcomeName("クリーニング")
                             .amount(3000L)
                             .quantity(1)
+                            .isCreditCard(false)
                             .outcomeDate(LocalDate.now().minusDays(2))
                             .outcomeCategory(OutcomeCategory.builder().categoryId(21).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build()

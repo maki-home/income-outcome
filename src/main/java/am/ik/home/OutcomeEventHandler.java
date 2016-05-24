@@ -20,21 +20,5 @@ public class OutcomeEventHandler {
         if (outcome.getOutcomeDate() == null) {
             outcome.setOutcomeDate(LocalDate.now());
         }
-        System.out.println("before create " + outcome);
-    }
-
-    @HandleAfterCreate
-    public void onAfterCreate(Outcome outcome) {
-        System.out.println("after create " + outcome);
-    }
-
-    @HandleBeforeSave
-    public void onBeforeSave(Outcome outcome) {
-        System.out.println("before save " + outcome);
-    }
-
-    @HandleAfterSave
-    public void onAfterSave(Outcome outcome) {
-        System.out.println("after save " + outcome);
     }
 }

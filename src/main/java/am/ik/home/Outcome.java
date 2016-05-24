@@ -44,6 +44,7 @@ public class Outcome implements Serializable {
     @JoinColumn(name = "category_id")
     @NotNull
     private OutcomeCategory outcomeCategory;
+    private boolean isCreditCard;
 
     // Audit
     @CreatedDate
@@ -71,6 +72,8 @@ public class Outcome implements Serializable {
         String getOutcomeBy();
 
         OutcomeCategory getOutcomeCategory();
+
+        boolean isCreditCard();
     }
 
     public static interface SummaryByDate {

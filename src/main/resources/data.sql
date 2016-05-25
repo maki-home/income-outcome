@@ -9,7 +9,8 @@ INSERT INTO parent_outcome_category (parent_category_id, parent_category_name) V
   (8, '美容・衛生'),
   (9, '交際'),
   (10, '小遣い'),
-  (11, 'その他');
+  (11, 'その他'),
+  (12, '固定費');;
 
 INSERT INTO outcome_category (category_id, category_name, parent_category_id) VALUES
   (1, '米', 1),
@@ -80,4 +81,14 @@ INSERT INTO outcome_category (category_id, category_name, parent_category_id) VA
   (66, '家族の小遣い', 10),
   (67, 'その他', 10),
   (68, '育児', 11),
-  (69, 'ペット', 11);
+  (69, 'ペット', 11),
+  (70, '家賃', 12),
+  (71, '電気', 12),
+  (72, 'ガス', 12),
+  (73, '水道', 12),
+  (74, '電話', 12),
+  (75, 'インターネット', 12),
+  (76, '新聞', 12),
+  (77, '保険', 12),
+  (78, '貯金', 12),
+  (79, 'その他', 12);

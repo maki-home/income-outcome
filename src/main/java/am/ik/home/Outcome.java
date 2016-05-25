@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -24,6 +25,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
+@DynamicUpdate
 public class Outcome implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +41,7 @@ public class Outcome implements Serializable {
     @NotNull
     private LocalDate outcomeDate;
     @NotNull
+    @Column(updatable = false)
     private String outcomeBy;
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -49,8 +52,10 @@ public class Outcome implements Serializable {
     // Audit
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
     private Date createdAt;
     @CreatedBy
+    @Column(updatable = false)
     private String createdBy;
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)

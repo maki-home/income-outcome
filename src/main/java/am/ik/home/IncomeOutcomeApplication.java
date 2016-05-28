@@ -31,6 +31,7 @@ public class IncomeOutcomeApplication {
         return new RequestDumperFilter();
     }
 
+    @Profile("!cloud")
     @Bean
     InitializingBean init(OutcomeRepository outcomeRepository) {
         return () -> {

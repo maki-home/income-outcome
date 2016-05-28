@@ -10,8 +10,7 @@ INSERT INTO parent_outcome_category (parent_category_id, parent_category_name) V
   (9, '交際'),
   (10, '小遣い'),
   (11, 'その他'),
-  (12, '固定費');;
-
+  (12, '固定費');
 INSERT INTO outcome_category (category_id, category_name, parent_category_id) VALUES
   (1, '米', 1),
   (2, 'パン', 1),

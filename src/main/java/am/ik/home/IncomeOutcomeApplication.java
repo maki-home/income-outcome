@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.web.client.AsyncRestTemplate;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -91,5 +92,10 @@ public class IncomeOutcomeApplication {
     @Bean
     AuditorAware<String> auditorProvider(Member member) {
         return member::userId;
+    }
+
+    @Bean
+    AsyncRestTemplate asyncRestTemplate() {
+        return new AsyncRestTemplate();
     }
 }

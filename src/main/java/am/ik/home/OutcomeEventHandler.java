@@ -11,6 +11,8 @@ import java.time.LocalDate;
 public class OutcomeEventHandler {
     @Autowired
     Member member;
+    @Autowired
+    OutcomeCategoryTrainer trainer;
 
     @HandleBeforeCreate
     public void onBeforeCreate(Outcome outcome) {
@@ -20,5 +22,10 @@ public class OutcomeEventHandler {
         if (outcome.getOutcomeDate() == null) {
             outcome.setOutcomeDate(LocalDate.now());
         }
+    }
+
+    @HandleAfterCreate
+    public void onAfterCreate(Outcome outcome) {
+        trainer.train(outcome.getOutcomeName(), outcome.getOutcomeCategory().getCategoryId());
     }
 }

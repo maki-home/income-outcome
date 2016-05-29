@@ -8,4 +8,4 @@ applications:
     services:
     - income-outcome-db
     env:
-      auth-server: https://home-uaa.cfapps.pez.pivotal.io/uaa
+      auth-server: https://home.cfapps.pez.pivotal.io/uaa

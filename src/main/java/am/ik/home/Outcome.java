@@ -41,7 +41,6 @@ public class Outcome implements Serializable {
     @NotNull
     private LocalDate outcomeDate;
     @NotNull
-    @Column(updatable = false)
     private String outcomeBy;
     @ManyToOne
     @JoinColumn(name = "category_id")

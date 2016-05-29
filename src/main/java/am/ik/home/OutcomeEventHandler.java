@@ -3,6 +3,7 @@ package am.ik.home;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 
@@ -16,7 +17,7 @@ public class OutcomeEventHandler {
 
     @HandleBeforeCreate
     public void onBeforeCreate(Outcome outcome) {
-        if (outcome.getOutcomeBy() == null) {
+        if (StringUtils.isEmpty(outcome.getOutcomeBy())) {
             outcome.setOutcomeBy(member.userId());
         }
         if (outcome.getOutcomeDate() == null) {

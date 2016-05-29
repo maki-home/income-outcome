@@ -15,6 +15,8 @@ public interface OutcomeRepository extends CrudRepository<Outcome, Long> {
     @Override
     Iterable<Outcome> findAll();
 
+    List<Outcome> findByOutcomeNameContaining(@Param("outcomeName") String outcomeName);
+
     @Query("SELECT x FROM Outcome x JOIN FETCH x.outcomeCategory WHERE x.outcomeDate BETWEEN :fromDate AND :toDate ORDER BY x.outcomeCategory.categoryId")
     List<Outcome> findByOutcomeDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Param("fromDate") LocalDate fromDate,
                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @Param("toDate") LocalDate toDate);

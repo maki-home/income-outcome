@@ -1,5 +1,8 @@
 package am.ik.home;
 
+import am.ik.home.income.Income;
+import am.ik.home.income.IncomeCategory;
+import am.ik.home.income.IncomeRepository;
 import am.ik.home.outcome.Outcome;
 import am.ik.home.outcome.OutcomeCategory;
 import am.ik.home.outcome.OutcomeRepository;
@@ -38,7 +41,7 @@ public class IncomeOutcomeApplication {
 
     @Profile("!cloud")
     @Bean
-    InitializingBean init(OutcomeRepository outcomeRepository) {
+    InitializingBean init(OutcomeRepository outcomeRepository, IncomeRepository incomeRepository) {
         return () -> {
             outcomeRepository.save(Arrays.asList(
                     Outcome.builder().outcomeName("にんじん")
@@ -80,6 +83,37 @@ public class IncomeOutcomeApplication {
                             .outcomeDate(LocalDate.now().minusDays(2))
                             .outcomeCategory(OutcomeCategory.builder().categoryId(21).build())
                             .outcomeBy("00000000-0000-0000-0000-000000000000").build()
+            ));
+            incomeRepository.deleteAll();
+            incomeRepository.save(Arrays.asList(
+                    Income.builder()
+                            .incomeName("6月給料")
+                            .incomeDate(LocalDate.now().withMonth(6))
+                            .incomeCategory(IncomeCategory.builder().categoryId(1).build())
+                            .amount(200000L)
+                            .incomeBy("00000000-0000-0000-0000-000000000000")
+                            .build(),
+                    Income.builder()
+                            .incomeName("6月ボーナス")
+                            .incomeDate(LocalDate.now().withMonth(6))
+                            .incomeCategory(IncomeCategory.builder().categoryId(2).build())
+                            .amount(400000L)
+                            .incomeBy("00000000-0000-0000-0000-000000000000")
+                            .build(),
+                    Income.builder()
+                            .incomeName("5月給料")
+                            .incomeDate(LocalDate.now().withMonth(5))
+                            .incomeCategory(IncomeCategory.builder().categoryId(1).build())
+                            .amount(200000L)
+                            .incomeBy("00000000-0000-0000-0000-000000000000")
+                            .build(),
+                    Income.builder()
+                            .incomeName("4月給料")
+                            .incomeDate(LocalDate.now().withMonth(4))
+                            .incomeCategory(IncomeCategory.builder().categoryId(1).build())
+                            .amount(200000L)
+                            .incomeBy("00000000-0000-0000-0000-000000000000")
+                            .build()
             ));
         };
     }

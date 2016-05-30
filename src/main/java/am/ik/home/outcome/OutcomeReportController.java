@@ -1,4 +1,4 @@
-package am.ik.home;
+package am.ik.home.outcome;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

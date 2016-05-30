@@ -1,5 +1,6 @@
-package am.ik.home;
+package am.ik.home.outcome;
 
+import am.ik.home.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.*;
 import org.springframework.stereotype.Component;

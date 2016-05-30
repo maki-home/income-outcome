@@ -1,5 +1,9 @@
 package am.ik.home;
 
+import am.ik.home.outcome.Outcome;
+import am.ik.home.outcome.OutcomeCategory;
+import am.ik.home.outcome.OutcomeRepository;
+import am.ik.home.outcome.ParentOutcomeCategory;
 import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;

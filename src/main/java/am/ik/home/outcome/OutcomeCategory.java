@@ -1,4 +1,4 @@
-package am.ik.home;
+package am.ik.home.outcome;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

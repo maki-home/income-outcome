@@ -123,7 +123,7 @@ public class IncomeOutcomeApplication {
     static class RestMvcConfig extends RepositoryRestConfigurerAdapter {
         @Override
         public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-            config.exposeIdsFor(Outcome.class, OutcomeCategory.class, ParentOutcomeCategory.class);
+            config.exposeIdsFor(Outcome.class, OutcomeCategory.class, ParentOutcomeCategory.class, Income.class, IncomeCategory.class);
         }
     }
 

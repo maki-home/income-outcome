@@ -1,6 +1,5 @@
 package am.ik.home.income;
 
-import am.ik.home.outcome.OutcomeCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -57,4 +56,18 @@ public class Income implements Serializable {
     private Date updatedAt;
     @LastModifiedBy
     private String updatedBy;
+    
+    public static interface InlineCategory {
+        Long getIncomeId();
+
+        String getIncomeName();
+
+        Long getAmount();
+
+        LocalDate getIncomeDate();
+
+        String getIncomeBy();
+
+        IncomeCategory getIncomeCategory();
+    }
 }

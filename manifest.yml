@@ -7,5 +7,6 @@ applications:
     buildpack: https://github.com/cloudfoundry/java-buildpack.git
     services:
     - income-outcome-db
+    - logstash
     env:
       auth-server: https://home.cfapps.pez.pivotal.io/uaa

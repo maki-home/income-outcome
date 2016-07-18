@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.M3</version>
+		<version>1.4.0.RC1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -93,7 +93,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Brixton.RELEASE</version>
+				<version>Brixton.SR3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

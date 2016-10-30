@@ -4,7 +4,7 @@ applications:
     memory: 1g
     instances: 1
     path: target/income-outcome-0.0.1-SNAPSHOT.jar
-    buildpack: https://github.com/cloudfoundry/java-buildpack.git
+    buildpack: java_buildpack_offline
     services:
     - income-outcome-db
     - logstash

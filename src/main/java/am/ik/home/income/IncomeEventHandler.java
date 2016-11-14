@@ -1,27 +1,28 @@
 package am.ik.home.income;
 
-import am.ik.home.Member;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
-import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
 import java.time.LocalDate;
 
-@Component
-@RepositoryEventHandler(Income.class)
-public class IncomeEventHandler {
-    @Autowired
-    Member member;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.stereotype.Component;
 
-    @HandleBeforeCreate
-    public void onBeforeCreate(Income Income) {
-        if (StringUtils.isEmpty(Income.getIncomeBy())) {
-            Income.setIncomeBy(member.userId());
-        }
-        if (Income.getIncomeDate() == null) {
-            Income.setIncomeDate(LocalDate.now());
-        }
-    }
+import am.ik.home.IncomeOutcomeSink;
+import lombok.extern.slf4j.Slf4j;
+
+@Component
+@Slf4j
+public class IncomeEventHandler {
+	private final IncomeRepository incomeRepository;
+
+	public IncomeEventHandler(IncomeRepository incomeRepository) {
+		this.incomeRepository = incomeRepository;
+	}
+
+	@StreamListener(IncomeOutcomeSink.INCOME_INPUT)
+	public void handleIncome(Income income) {
+		log.info("handle {}", income);
+		if (income.getIncomeDate() == null) {
+			income.setIncomeDate(LocalDate.now());
+		}
+		incomeRepository.save(income);
+	}
 }

@@ -1,33 +1,33 @@
 package am.ik.home.outcome;
 
-import am.ik.home.Member;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.core.annotation.*;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
 import java.time.LocalDate;
 
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.stereotype.Component;
+
+import am.ik.home.IncomeOutcomeSink;
+import lombok.extern.slf4j.Slf4j;
+
 @Component
-@RepositoryEventHandler(Outcome.class)
+@Slf4j
 public class OutcomeEventHandler {
-    @Autowired
-    Member member;
-    @Autowired
-    OutcomeCategoryTrainer trainer;
+	private final OutcomeRepository outcomeRepository;
+	private final OutcomeCategoryTrainer trainer;
 
-    @HandleBeforeCreate
-    public void onBeforeCreate(Outcome outcome) {
-        if (StringUtils.isEmpty(outcome.getOutcomeBy())) {
-            outcome.setOutcomeBy(member.userId());
-        }
-        if (outcome.getOutcomeDate() == null) {
-            outcome.setOutcomeDate(LocalDate.now());
-        }
-    }
+	public OutcomeEventHandler(OutcomeRepository outcomeRepository,
+			OutcomeCategoryTrainer trainer) {
+		this.outcomeRepository = outcomeRepository;
+		this.trainer = trainer;
+	}
 
-    @HandleAfterCreate
-    public void onAfterCreate(Outcome outcome) {
-        trainer.train(outcome.getOutcomeName(), outcome.getOutcomeCategory().getCategoryId());
-    }
+	@StreamListener(IncomeOutcomeSink.OUTCOME_INPUT)
+	public void handleOutcome(Outcome outcome) {
+		log.info("handle {}", outcome);
+		if (outcome.getOutcomeDate() == null) {
+			outcome.setOutcomeDate(LocalDate.now());
+		}
+		outcomeRepository.save(outcome);
+		trainer.train(outcome.getOutcomeName(),
+				outcome.getOutcomeCategory().getCategoryId());
+	}
 }

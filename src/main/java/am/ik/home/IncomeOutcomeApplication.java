@@ -1,12 +1,8 @@
 package am.ik.home;
 
-import am.ik.home.income.Income;
-import am.ik.home.income.IncomeCategory;
-import am.ik.home.income.IncomeRepository;
-import am.ik.home.outcome.Outcome;
-import am.ik.home.outcome.OutcomeCategory;
-import am.ik.home.outcome.OutcomeRepository;
-import am.ik.home.outcome.ParentOutcomeCategory;
+import java.time.LocalDate;
+import java.util.Arrays;
+
 import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
@@ -19,14 +15,22 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.web.client.AsyncRestTemplate;
 
-import java.time.LocalDate;
-import java.util.Arrays;
+import am.ik.home.income.Income;
+import am.ik.home.income.IncomeCategory;
+import am.ik.home.income.IncomeRepository;
+import am.ik.home.outcome.Outcome;
+import am.ik.home.outcome.OutcomeCategory;
+import am.ik.home.outcome.OutcomeRepository;
+import am.ik.home.outcome.ParentOutcomeCategory;
 
 @SpringBootApplication
-@EnableResourceServer
 @EnableJpaAuditing
 @EnableBinding(IncomeOutcomeSink.class)
 public class IncomeOutcomeApplication {
@@ -128,6 +132,32 @@ public class IncomeOutcomeApplication {
             config.exposeIdsFor(Outcome.class, OutcomeCategory.class, ParentOutcomeCategory.class, Income.class, IncomeCategory.class);
         }
     }
+
+	@Configuration
+	@EnableResourceServer
+	static class OAuth2ResourceConfig extends ResourceServerConfigurerAdapter {
+		@Override
+		public void configure(HttpSecurity http) throws Exception {
+			http.sessionManagement()
+					.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+					.authorizeRequests().antMatchers(HttpMethod.GET, "/v1/incomes/**")
+					.access("#oauth2.hasScope('income.read') or #oauth2.hasScope('admin.read')")
+					.antMatchers(HttpMethod.POST, "/v1/incomes/**")
+					.access("#oauth2.hasScope('income.write') or #oauth2.hasScope('admin.write')")
+					.antMatchers(HttpMethod.PUT, "/v1/incomes/**")
+					.access("#oauth2.hasScope('income.write') or #oauth2.hasScope('admin.write')")
+					.antMatchers(HttpMethod.DELETE, "/v1/incomes/**")
+					.access("#oauth2.hasScope('income.write') or #oauth2.hasScope('admin.write')")
+					.antMatchers(HttpMethod.GET, "/v1/outcomes/**")
+					.access("#oauth2.hasScope('outcome.read') or #oauth2.hasScope('admin.read')")
+					.antMatchers(HttpMethod.POST, "/v1/outcomes/**")
+					.access("#oauth2.hasScope('outcome.write') or #oauth2.hasScope('admin.write')")
+					.antMatchers(HttpMethod.PUT, "/v1/outcomes/**")
+					.access("#oauth2.hasScope('outcome.write') or #oauth2.hasScope('admin.write')")
+					.antMatchers(HttpMethod.DELETE, "/v1/outcomes/**")
+					.access("#oauth2.hasScope('outcome.write') or #oauth2.hasScope('admin.write')");
+		}
+	}
 
     @Bean
     AuditorAware<String> auditorProvider(Member member) {

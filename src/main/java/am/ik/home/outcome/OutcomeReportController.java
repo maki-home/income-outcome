@@ -14,14 +14,14 @@ public class OutcomeReportController {
 	@Autowired
 	OutcomeRepository outcomeRepository;
 
-	@RequestMapping(path = "api/outcomes/reportByDate")
+	@RequestMapping(path = "v1/outcomes/reportByDate")
 	List<Outcome.SummaryByDate> reportByDate(
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("fromDate") LocalDate fromDate,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("toDate") LocalDate toDate) {
 		return outcomeRepository.findSummaryByDate(fromDate, toDate);
 	}
 
-	@RequestMapping(path = "api/outcomes/reportByParentCategory")
+	@RequestMapping(path = "v1/outcomes/reportByParentCategory")
 	List<Outcome.SummaryByParentCategory> reportByParentCategory(
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("fromDate") LocalDate fromDate,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("toDate") LocalDate toDate) {

@@ -1,9 +1,13 @@
 package am.ik.home.outcome;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,12 +15,10 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
@@ -26,70 +28,70 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @DynamicUpdate
 public class Outcome implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long outcomeId;
-    @NotNull
-    private String outcomeName;
-    @NotNull
-    @Min(0)
-    private Long amount;
-    @NotNull
-    @Min(0)
-    private Integer quantity;
-    @NotNull
-    private LocalDate outcomeDate;
-    @NotNull
-    private String outcomeBy;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @NotNull
-    private OutcomeCategory outcomeCategory;
-    private boolean isCreditCard;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long outcomeId;
+	@NotNull
+	private String outcomeName;
+	@NotNull
+	@Min(0)
+	private Long amount;
+	@NotNull
+	@Min(0)
+	private Integer quantity;
+	@NotNull
+	private LocalDate outcomeDate;
+	@NotNull
+	private String outcomeBy;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	@NotNull
+	private OutcomeCategory outcomeCategory;
+	private boolean isCreditCard;
 
-    // Audit
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false)
-    private Date createdAt;
-    @CreatedBy
-    @Column(updatable = false)
-    private String createdBy;
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
-    @LastModifiedBy
-    private String updatedBy;
+	// Audit
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false)
+	private Date createdAt;
+	@CreatedBy
+	@Column(updatable = false)
+	private String createdBy;
+	@LastModifiedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedAt;
+	@LastModifiedBy
+	private String updatedBy;
 
-    public static interface InlineCategory {
-        Long getOutcomeId();
+	public static interface InlineCategory {
+		Long getOutcomeId();
 
-        String getOutcomeName();
+		String getOutcomeName();
 
-        Long getAmount();
+		Long getAmount();
 
-        Integer getQuantity();
+		Integer getQuantity();
 
-        LocalDate getOutcomeDate();
+		LocalDate getOutcomeDate();
 
-        String getOutcomeBy();
+		String getOutcomeBy();
 
-        OutcomeCategory getOutcomeCategory();
+		OutcomeCategory getOutcomeCategory();
 
-        boolean isCreditCard();
-    }
+		boolean isCreditCard();
+	}
 
-    public static interface SummaryByDate {
-        LocalDate getOutcomeDate();
+	public static interface SummaryByDate {
+		LocalDate getOutcomeDate();
 
-        Long getSubTotal();
-    }
+		Long getSubTotal();
+	}
 
-    public static interface SummaryByParentCategory {
-        Integer getParentCategoryId();
+	public static interface SummaryByParentCategory {
+		Integer getParentCategoryId();
 
-        String getParentCategoryName();
+		String getParentCategoryName();
 
-        Long getSubTotal();
-    }
+		Long getSubTotal();
+	}
 }

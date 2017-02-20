@@ -10,4 +10,4 @@ applications:
     - income-outcome-rabbitmq
     - logstash
     env:
-      auth-server: https://home.cfapps.pez.pivotal.io/uaa
+      auth-server: https://home.cfapps.pez.pivotal.io

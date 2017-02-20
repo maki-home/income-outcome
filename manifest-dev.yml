@@ -9,4 +9,4 @@ applications:
     - income-outcome-db-dev
     - income-outcome-rabbitmq-dev
     env:
-      auth-server: https://home.cfapps.pez.pivotal.io/uaa
+      auth-server: https://home-dev.cfapps.pez.pivotal.io

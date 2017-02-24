@@ -9,5 +9,7 @@ applications:
     - income-outcome-db
     - income-outcome-rabbitmq
     - logstash
+    domains:
+    - ik.am
     env:
-      auth-server: https://home.cfapps.pez.pivotal.io
+      auth-server: https://home.ik.am

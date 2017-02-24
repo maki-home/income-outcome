@@ -8,5 +8,7 @@ applications:
     services:
     - income-outcome-db
     - income-outcome-rabbitmq
+    domains:
+    - ik.am
     env:
-      auth-server: https://home-dev.cfapps.pez.pivotal.io
+      auth-server: https://home-dev.ik.am

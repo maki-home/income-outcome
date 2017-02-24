@@ -11,5 +11,6 @@ applications:
     - logstash
     domains:
     - ik.am
+    - pezapp.io
     env:
       auth-server: https://home.ik.am

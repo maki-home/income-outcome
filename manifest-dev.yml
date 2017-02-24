@@ -10,5 +10,6 @@ applications:
     - income-outcome-rabbitmq
     domains:
     - ik.am
+    - pezapp.io
     env:
       auth-server: https://home-dev.ik.am
